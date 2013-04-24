@@ -27,7 +27,6 @@ import net.spy.memcached.CASValue;
 import net.spy.memcached.ConnectionFactory;
 import net.spy.memcached.DefaultConnectionFactory;
 import net.spy.memcached.DefaultHashAlgorithm;
-import net.spy.memcached.HashAlgorithm;
 import net.spy.memcached.MemcachedClient;
 import net.spy.memcached.transcoders.Transcoder;
 

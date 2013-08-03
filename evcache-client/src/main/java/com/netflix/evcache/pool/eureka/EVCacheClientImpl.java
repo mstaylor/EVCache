@@ -57,6 +57,10 @@ public class EVCacheClientImpl  extends AbstractEVCacheClientImpl {
         super(appName, zone, id, readTimeout, new EVCacheConnectionFactory(appName, zone, id, maxQueueSize));
 
         this.client = new MemcachedClient(connectionFactory, memcachedNodesInZone);
+<<<<<<< refs/remotes/upstream/master
+=======
+//        this.client.setName(appName + "-" + zone + "-" + id);
+>>>>>>> HEAD~2
         this.connectionObserver = new EVCacheConnectionObserver(appName, zone, id);
         this.client.addObserver(connectionObserver);
     }

@@ -16,6 +16,7 @@
 
 package com.netflix.evcache;
 
+import java.net.SocketAddress;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.Future;
@@ -267,6 +268,15 @@ public interface EVCache {
      *          issues during deserialization or timeout retrieving the value or any IO Related issues
      */
     <T> Future<T> getAsynchronous(String key, EVCacheTranscoder<T> tc) throws EVCacheException;
+
+    /**
+     * Performs the given stats operation across all the EVCache servers in the cluster and returns its value.
+     * This is mainly used for admin purpose
+     *
+     * @param cmd - the stats command to be executed.
+     * @return A Map of EVCache server SocketAddress to the stats command output. The value is a Map of key value pairs
+     */
+    Map<SocketAddress, Map<String, String>> getStats(String cmd);
 
 
     /**

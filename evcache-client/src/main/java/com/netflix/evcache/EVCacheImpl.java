@@ -16,6 +16,7 @@
 
 package com.netflix.evcache;
 
+import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -537,6 +538,11 @@ public final class EVCacheImpl implements EVCache {
             }
             throw new EVCacheException("Exception while deleting the data for key : " + key, ex);
         }
+    }
+
+    public Map<SocketAddress, Map<String, String>> getStats(String cmd) {
+        final EVCacheClient client = _pool.getEVCacheClient();
+        return client.getStats(cmd);
     }
 
     /**

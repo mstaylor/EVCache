@@ -47,6 +47,10 @@ public class SimpleEVCacheClientImpl extends AbstractEVCacheClientImpl {
         super(appName, "GLOBAL", id, maxQueueSize, readTimeout);
 
         this.client = new MemcachedClient(connectionFactory, memcachedNodesInZone);
+<<<<<<< refs/remotes/upstream/master
+=======
+      //  this.client.setName(appName + "-" + id);
+>>>>>>> HEAD~2
     }
 
     /**

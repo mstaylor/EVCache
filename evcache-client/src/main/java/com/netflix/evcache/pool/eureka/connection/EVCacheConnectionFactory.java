@@ -22,7 +22,10 @@ import java.util.List;
 
 import net.spy.memcached.BinaryConnectionFactory;
 import net.spy.memcached.DefaultHashAlgorithm;
+<<<<<<< refs/remotes/upstream/master
 import net.spy.memcached.HashAlgorithm;
+=======
+>>>>>>> HEAD~2
 import net.spy.memcached.KetamaNodeLocator;
 import net.spy.memcached.MemcachedConnection;
 import net.spy.memcached.MemcachedNode;
@@ -52,7 +55,11 @@ public class EVCacheConnectionFactory extends BinaryConnectionFactory {
      * @param appName - the name of the EVCache app
      * @param len the length of the operation queue
      */
+<<<<<<< refs/remotes/upstream/master
     public EVCacheConnectionFactory(String appName, String zone, int id, int len) {
+=======
+    public EVCacheConnectionFactory(String appName, int len) {
+>>>>>>> HEAD~2
         super(len, BinaryConnectionFactory.DEFAULT_READ_BUFFER_SIZE, DefaultHashAlgorithm.KETAMA_HASH);
         this.appName = appName;
         this.zone = zone;
@@ -64,6 +71,7 @@ public class EVCacheConnectionFactory extends BinaryConnectionFactory {
      */
     public NodeLocator createLocator(List<MemcachedNode> list) {
         return new KetamaNodeLocator(list, DefaultHashAlgorithm.KETAMA_HASH, new EVCacheKetamaNodeLocatorConfiguration(appName));
+<<<<<<< refs/remotes/upstream/master
     }
     
     
@@ -72,5 +80,7 @@ public class EVCacheConnectionFactory extends BinaryConnectionFactory {
         final MemcachedConnection connection = new MemcachedConnection(getReadBufSize(), this, addrs, getInitialObservers(), getFailureMode(), getOperationFactory());
         connection.setName(appName + "-" + zone + "-" + id);
         return connection;
+=======
+>>>>>>> HEAD~2
     }
 }

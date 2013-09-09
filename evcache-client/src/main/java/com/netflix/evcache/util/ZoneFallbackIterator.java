@@ -66,6 +66,7 @@ public class ZoneFallbackIterator {
      * @return - the next zone in the iterator. If there are none then null is returned.
      */
     public String next(String ignoreZone) {
+        System.out.println("test");
         if (entry == null) return null;
         entry = entry.next;
         if (entry.element.equals(ignoreZone)) {

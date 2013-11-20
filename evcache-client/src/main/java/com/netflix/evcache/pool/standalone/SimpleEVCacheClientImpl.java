@@ -46,7 +46,7 @@ public class SimpleEVCacheClientImpl extends AbstractEVCacheClientImpl {
                             List<InetSocketAddress> memcachedNodesInZone) throws IOException {
         super(appName, "GLOBAL", id, maxQueueSize, readTimeout);
 
-        this.client = new MemcachedClient(connectionFactory, memcachedNodesInZone);
+        this.client = new MemcachedClient(connectionFactory, memcachedNodesInZone, true);
 
     }
 

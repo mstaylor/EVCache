@@ -49,7 +49,7 @@ public class ZoneClusteredEVCacheClientImpl  extends AbstractEVCacheClientImpl {
             DynamicIntProperty readTimeout, List<InetSocketAddress> memcachedNodesInZone) throws IOException {
         super(appName, zone, id, maxQueueSize, readTimeout);
 
-        this.client = new MemcachedClient(connectionFactory, memcachedNodesInZone);
+        this.client = new MemcachedClient(connectionFactory, memcachedNodesInZone, true);
 
      //   this.client.setName(appName + "-" + zone + "-" + id);
 

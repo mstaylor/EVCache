@@ -115,7 +115,7 @@ public class DiscoveryNodeListProvider implements EVCacheNodeList {
                 instances = config.getInetSocketAddress();
             } else {
                 instances = new HashSet<InetSocketAddress>();
-                config = new EVCacheServerGroupConfig(serverGroup, instances, rendPort, udsproxyMemcachedPort, udsproxyMementoPort);
+                config = new EVCacheServerGroupConfig(serverGroup, instances, rendPort, udsproxyMemcachedPort, udsproxyMementoPort, false);
                 instancesSpecific.put(serverGroup, config);
                 EVCacheMetricsFactory.getLongGauge(_appName + "-port", BasicTagList.of("ServerGroup", asgName, "APP", _appName)).set(Long.valueOf(port));
             }

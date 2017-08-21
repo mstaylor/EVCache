@@ -51,7 +51,7 @@ public class SimpleNodeListProvider implements EVCacheNodeList {
                     final StringTokenizer instanceTokenizer = new StringTokenizer(instanceToken, ",");
                     final Set<InetSocketAddress> instanceList = new HashSet<InetSocketAddress>();
                     final ServerGroup rSet = new ServerGroup(replicaSetToken, replicaSetToken);
-                    final EVCacheServerGroupConfig config = new EVCacheServerGroupConfig(rSet, instanceList, 0, 0, 0);
+                    final EVCacheServerGroupConfig config = new EVCacheServerGroupConfig(rSet, instanceList, 0, 0, 0, true);
                     instancesSpecific.put(rSet, config);
                     while (instanceTokenizer.hasMoreTokens()) {
                         final String instance = instanceTokenizer.nextToken();

@@ -10,13 +10,15 @@ public class EVCacheServerGroupConfig {
     private final int rendPort;
     private final int udsproxyMemcachedPort;
     private final int updsproxyMememtoPort;
-    public EVCacheServerGroupConfig(ServerGroup serverGroup, Set<InetSocketAddress> inetSocketAddress, int rendPort, int rendMemcachedPort, int rendMememtoPort) {
+    private final boolean overrideSpyMemcachedClusterConfig;
+    public EVCacheServerGroupConfig(ServerGroup serverGroup, Set<InetSocketAddress> inetSocketAddress, int rendPort, int rendMemcachedPort, int rendMememtoPort, boolean overrideSpyMemcachedClusterConfig) {
         super();
         this.serverGroup = serverGroup;
         this.inetSocketAddress = inetSocketAddress;
         this.rendPort = rendPort;
         this.udsproxyMemcachedPort = rendMemcachedPort;
         this.updsproxyMememtoPort = rendMememtoPort;
+        this.overrideSpyMemcachedClusterConfig = overrideSpyMemcachedClusterConfig;
     }
 
     public ServerGroup getServerGroup() {
@@ -49,4 +51,7 @@ public class EVCacheServerGroupConfig {
                 + ", rendMemcachedPort=" + udsproxyMemcachedPort + ", rendMememtoPort=" + updsproxyMememtoPort + "]";
     }
 
+    public boolean isOverrideSpyMemcachedClusterConfig() {
+        return overrideSpyMemcachedClusterConfig;
+    }
 }

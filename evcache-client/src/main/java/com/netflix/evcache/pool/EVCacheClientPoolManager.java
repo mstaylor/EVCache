@@ -190,11 +190,18 @@ public class EVCacheClientPoolManager {
         final EVCacheNodeList provider;
         if (ConfigurationManager.getConfigInstance().getBoolean(APP + ".use.simple.node.list.provider", false)) {
             provider = new SimpleNodeListProvider(APP + "-NODES");
-        } else {
+        } else if (ConfigurationManager.getConfigInstance().getBoolean(APP + ".use.awsCacheCluster.node.list.provider", false)) {
+            provider = new AWSClusteredClientNodeListProvider(APP + "-NODES");
+        }
+
+        else {
             provider = new DiscoveryNodeListProvider(applicationInfoManager, discoveryClient, APP);
         }
 
         final EVCacheClientPool pool = new EVCacheClientPool(APP, provider, this);
+
+
+
         scheduleRefresh(pool);
         poolMap.put(APP, pool);
     }

@@ -8,6 +8,7 @@ import java.nio.channels.SocketChannel;
 import java.util.Collection;
 
 import net.spy.memcached.MemcachedNode;
+import net.spy.memcached.config.NodeEndPoint;
 import net.spy.memcached.ops.Operation;
 
 public class EVCacheMemcachedNodeROImpl implements MemcachedNode {
@@ -81,6 +82,16 @@ public class EVCacheMemcachedNodeROImpl implements MemcachedNode {
 
     public SocketAddress getSocketAddress() {
         return root.getSocketAddress();
+    }
+
+    @Override
+    public NodeEndPoint getNodeEndPoint() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setNodeEndPoint(NodeEndPoint nodeEndPoint) {
+        throw new UnsupportedOperationException();
     }
 
     public ByteBuffer getWbuf() {

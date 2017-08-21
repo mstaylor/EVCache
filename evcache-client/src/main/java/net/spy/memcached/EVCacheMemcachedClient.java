@@ -64,8 +64,8 @@ public class EVCacheMemcachedClient extends MemcachedClient {
 
     public EVCacheMemcachedClient(ConnectionFactory cf, List<InetSocketAddress> addrs,
             ChainedDynamicProperty.IntProperty readTimeout, String appName, String zone, int id,
-            ServerGroup serverGroup, EVCacheClient client) throws IOException {
-        super(cf, addrs);
+            ServerGroup serverGroup, EVCacheClient client, boolean overrideClusterConfig) throws IOException {
+        super(cf, addrs, overrideClusterConfig);
         this.id = id;
         this.appName = appName;
         this.zone = zone;

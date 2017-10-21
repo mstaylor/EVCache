@@ -17,15 +17,7 @@ import com.netflix.evcache.pool.EVCacheNodeLocator;
 import com.netflix.evcache.pool.ServerGroup;
 import com.netflix.evcache.util.EVCacheConfig;
 
-import net.spy.memcached.BinaryConnectionFactory;
-import net.spy.memcached.ConnectionObserver;
-import net.spy.memcached.DefaultHashAlgorithm;
-import net.spy.memcached.EVCacheConnection;
-import net.spy.memcached.FailureMode;
-import net.spy.memcached.HashAlgorithm;
-import net.spy.memcached.MemcachedConnection;
-import net.spy.memcached.MemcachedNode;
-import net.spy.memcached.NodeLocator;
+import net.spy.memcached.*;
 import net.spy.memcached.ops.Operation;
 import net.spy.memcached.protocol.binary.EVCacheNodeImpl;
 import net.spy.memcached.transcoders.Transcoder;
@@ -45,7 +37,7 @@ public class BaseConnectionFactory extends BinaryConnectionFactory {
     
     BaseConnectionFactory(String appName, int len, long operationTimeout, long opMaxBlockTime, int id,
             ServerGroup serverGroup, EVCacheClientPoolManager poolManager) {
-        super(len, BinaryConnectionFactory.DEFAULT_READ_BUFFER_SIZE, DefaultHashAlgorithm.KETAMA_HASH);
+        super(ClientMode.Static, len, BinaryConnectionFactory.DEFAULT_READ_BUFFER_SIZE, DefaultHashAlgorithm.KETAMA_HASH);
         this.appName = appName;
         this.operationTimeout = operationTimeout;
         this.opMaxBlockTime = opMaxBlockTime;

@@ -92,7 +92,7 @@ public class EVCacheClient {
             List<InetSocketAddress> memcachedNodesInZone, int maxQueueSize, DynamicIntProperty maxReadQueueSize,
             ChainedDynamicProperty.IntProperty readTimeout, ChainedDynamicProperty.IntProperty bulkReadTimeout,
             DynamicIntProperty opQueueMaxBlockTime,
-            DynamicIntProperty operationTimeout, EVCacheClientPool pool, boolean overrideClusterConfig) throws IOException {
+            DynamicIntProperty operationTimeout, EVCacheClientPool pool) throws IOException {
         this.memcachedNodesInZone = memcachedNodesInZone;
         this.id = id;
         this.appName = appName;
@@ -110,7 +110,7 @@ public class EVCacheClient {
         this.chunkingTranscoder = new ChunkTranscoder();
         this.maxWriteQueueSize = maxQueueSize;
 
-        this.evcacheMemcachedClient = new EVCacheMemcachedClient(connectionFactory, memcachedNodesInZone, readTimeout, appName, zone, id, serverGroup, this, overrideClusterConfig);
+        this.evcacheMemcachedClient = new EVCacheMemcachedClient(connectionFactory, memcachedNodesInZone, readTimeout, appName, zone, id, serverGroup, this);
         this.connectionObserver = new EVCacheConnectionObserver(appName, serverGroup, id);
         this.evcacheMemcachedClient.addObserver(connectionObserver);
 

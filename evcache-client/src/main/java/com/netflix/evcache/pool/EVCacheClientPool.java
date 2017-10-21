@@ -752,7 +752,7 @@ public class EVCacheClientPool implements Runnable, EVCacheClientPoolMBean {
                         EVCacheClient client;
                         try {
                             client = new EVCacheClient(_appName, zone, i, config, memcachedSAInServerGroup, maxQueueSize, 
-                            		_maxReadQueueSize, _readTimeout, _bulkReadTimeout, _opQueueMaxBlockTime, _operationTimeout, this, config.isOverrideSpyMemcachedClusterConfig());
+                            		_maxReadQueueSize, _readTimeout, _bulkReadTimeout, _opQueueMaxBlockTime, _operationTimeout, this);
                             newClients.add(client);
                             final int id = client.getId();
                             if (log.isDebugEnabled()) log.debug("AppName :" + _appName + "; ServerGroup : " + serverGroup + "; intit : client.getId() : " + id);

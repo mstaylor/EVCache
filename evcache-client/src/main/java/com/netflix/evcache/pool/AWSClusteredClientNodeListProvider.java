@@ -1,6 +1,8 @@
 package com.netflix.evcache.pool;
 
 import com.google.common.base.Throwables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.net.InetAddresses;
 import net.spy.memcached.MemcachedClient;
 import net.spy.memcached.config.NodeEndPoint;
@@ -49,20 +51,23 @@ public class AWSClusteredClientNodeListProvider implements EVCacheNodeList{
                     final String cacheClusterToken = replicaSetTokenizer.nextToken();
                     final Set<InetSocketAddress> instanceList = new HashSet<>();
                     final ServerGroup rSet = new ServerGroup(replicaSetToken, replicaSetToken);
-                    final EVCacheServerGroupConfig config = new EVCacheServerGroupConfig(rSet, instanceList, 0, 0, 0, false);
+                    final EVCacheServerGroupConfig config = new EVCacheServerGroupConfig(rSet, instanceList, 0, 0, 0, true);
                     instancesSpecific.put(rSet, config);
                     final int index = cacheClusterToken.indexOf(':');
                     final String host = cacheClusterToken.substring(0, index);
                     final String port = cacheClusterToken.substring(index + 1);
+                    Map<String, InetSocketAddress> mappedNodes;
                     if (log.isInfoEnabled()) {
-                        log.info("adding host: {}:{}", host, port);
+                        log.info("aws discovery - adding host: {}:{}", host, port);
                     }
                     try {
-                        final MemcachedClient client = new MemcachedClient(new InetSocketAddress(host, Integer.parseInt(port)));
-                        instanceList.addAll(client.getAllNodeEndPoints().stream().map(NodeEndPoint::getInetSocketAddress).collect(Collectors.toList()));
+                        final MemcachedClient client = new MemcachedClient(null, Lists.newArrayList(new InetSocketAddress(host, Integer.parseInt(port))), false);
+                        mappedNodes = client.getAvailableNodeEndPoints().stream().collect(Collectors.toMap(NodeEndPoint::getIpAddress, NodeEndPoint::getInetSocketAddress, (a, b) -> b));
+                        instanceList.addAll(mappedNodes.values());
+                        //instanceList.addAll(client.getAvailableNodeEndPoints().stream().map(NodeEndPoint::getInetSocketAddress).collect(Collectors.toList()));
                         client.shutdown();
                     } catch (IOException e) {
-                        log.warn("Exception thrown during memcached host registration: {}", Throwables.getStackTraceAsString(e));
+                        log.warn("Exception thrown during aws discovery memcached host registration: {}", Throwables.getStackTraceAsString(e));
                     }
                 }
             }
